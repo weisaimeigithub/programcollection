@@ -1,0 +1,39 @@
+<script>
+
+            var sDivWidth = 88; //检索框“Google搜索”的宽度 
+            //开始
+            var windowWidth; //窗口的宽 
+            //取得窗口的宽 
+            if (self.innerWidth) {
+                windowWidth = self.innerWidth;
+            } else if (document.documentElement && document.documentElement.clientWidth) {
+                windowWidth = document.documentElement.clientWidth;
+            } else if (document.body) {
+                windowWidth = document.body.clientWidth;
+            }
+
+            var obj = $(".layerBoxcl");
+            obj.css({ 'display': 'block', 'position': 'absolute' });
+            var rX, rX, wT;
+            //ie6 ie7
+            if (!$.support.leadingWhitespace) {
+                wT = (e.clientX + sDivWidth + obj.outerWidth(true)) - windowWidth;
+                rY = document.documentElement.scrollTop + e.clientY;
+                rX = document.documentElement.scrollLeft + e.clientX;
+                //rY = (evt.clientY < 25) ? rY + 10 : rY + 25;
+                rY = (e.clientY + obj.outerHeight(true) < $(window).height()) ? rY - 60 : rY - obj.outerHeight(true) - 100;
+                rX = (wT > 0) ? rX - obj.outerWidth(true) : rX - 10;
+            }
+            else {
+                var sT = (document.documentElement.scrollTop > 0) ? document.documentElement.scrollTop : document.body.scrollTop;
+                wT = (e.pageX + sDivWidth + obj.outerWidth(true)) - windowWidth;
+                //rY = ((evt.pageY - sT) < 25) ? evt.pageY + 10 : evt.pageY + 15;
+                rY = (e.pageY - sT + obj.outerHeight(true) < $(window).height()) ? e.pageY - 60 : e.pageY - obj.outerHeight(true) - 100;
+                rX = (wT > 0) ? e.pageX - obj.outerWidth(true) : e.pageX - 10;
+            }
+            obj.css("top", rY);
+            obj.css("left", rX);
+            obj.css("z-index", 20000)
+
+
+</script>
